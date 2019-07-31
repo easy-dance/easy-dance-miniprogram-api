@@ -108,7 +108,7 @@ WSGI_APPLICATION = 'easydance_puppet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql',
+        'NAME': 'easydance',
         'USER': 'root',
         'PASSWORD': '123',
         'HOST': '',
