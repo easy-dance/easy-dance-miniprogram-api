@@ -31,8 +31,9 @@ def show(req):
 	  'userinfo': result[0].username,
   }
   return HttpResponse(json.dumps(data, ensure_ascii=False), 
-								content_type="applicFation/json",
-								charset='utf-8', status='200',
-								reason='success')
+						content_type="applicFation/json",
+						charset='utf-8', 
+						status='200',
+						reason='success')
 
 # Create your views here.
