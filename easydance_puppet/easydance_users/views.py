@@ -1,39 +1,41 @@
-from django.shortcuts import render
+# 用户操作相关接口
+
+import json
 from django.http import HttpResponse
 from . import models
-import json
-
 
 def login(req):
-  print('Login!')
-  dic = {'username': req.GET.get('username'), 'password': req.GET.get('password')}
-  users = models.Users(**dic)
-  users.save()
-  return HttpResponse('Login Success!')
-
-
-def delete(req):
-  print('Delete!')
-  models.Users.objects.filter(username='432').delete()
-  return HttpResponse('Delete Success!')
-
-
-def update(req):
-  print('Update!')
-  models.Users.objects.filter(id='9').update(password='456')
-  return HttpResponse('Update Success!')
-
-
-def show(req):
-  print('Show!')
-  result = models.Users.objects.all()  # select * from table_name
-  data = {
-	  'userinfo': result[0].username,
-  }
-  return HttpResponse(json.dumps(data, ensure_ascii=False), 
-						content_type="applicFation/json",
-						charset='utf-8', 
-						status='200',
-						reason='success')
+    try:
+        openid = req.GET.get('openid')
+        result = models.Users.objects.get(openid=openid)
+        check_result = {
+            'nickName': result.nickName,
+            'avatarUrl': result.avatarUrl,
+            'country': result.country,
+            'province': result.province,
+            'gender': result.gender,
+            'lanuage': result.lanuage,
+            'city': result.city,
+            'openid': result.openid,
+        }
+    except Exception:
+        dic = {
+            'nickName': req.GET.get('nickName'),
+            'avatarUrl': req.GET.get('avatarUrl'),
+            'country': req.GET.get('country'),
+            'province': req.GET.get('province'),
+            'gender': req.GET.get('gender'),
+            'lanuage': req.GET.get('lanuage'),
+            'city': req.GET.get('city'),
+            'openid': req.GET.get('openid'),
+        }
+        users = models.Users(**dic)
+        users.save()
+        check_result = dic
+    return HttpResponse(json.dumps(check_result, ensure_ascii=False),
+                        content_type="application/json",
+                        charset='utf-8',
+                        status='200',
+                        reason='success')
 
 # Create your views here.

@@ -1,5 +1,15 @@
 # Let's do something cool~
 
+## pylint配置
+
+```bash
+conda install -c conda-forge pylint-django # conda环境输入
+```
+
+```json
+ "python.linting.pylintArgs": [ "--load-plugins", "pylint_django" ],  //vscode里的settings.json的默认配置
+```
+
 ## 数据库相关
   
 > 以下是我今早(2019.7.28)折腾了很久得出的经验。。
